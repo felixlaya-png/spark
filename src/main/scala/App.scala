@@ -19,6 +19,7 @@ object App {
     ).toDF("name", "age")
 
     df.show()
+    df.show()
 
     // Keep job alive briefly so you can view the Spark UI on port 4040
     println("Open the Spark UI on port 4040 (Ports panel). Sleeping 10s...")

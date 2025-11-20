@@ -1,0 +1,14 @@
+order_id,customer_id,country,product,category,unit_price,quantity,order_timestamp
+1001,1,ES,"Laptop 13""",Electronics,899.99,1,2025-01-05T10:30:00
+1001,1,ES,Mouse Wireless,Electronics,25.5,2,2025-01-05T10:30:00
+1002,2,FR,Coffee Beans 1kg,Grocery,12.9,3,2025-01-06T09:15:00
+1003,3,ES,Office Chair,Furniture,149.0,1,2025-01-06T11:45:00
+1004,4,DE,Mechanical Keyboard,Electronics,120.0,1,2025-01-07T14:25:00
+1004,4,DE,Mouse Pad XL,Electronics,19.99,1,2025-01-07T14:25:00
+1005,2,FR,Espresso Machine,Electronics,249.0,1,2025-01-08T08:00:00
+1006,5,IT,Notebook A5,Stationery,3.5,10,2025-01-08T16:20:00
+1007,6,ES,Standing Desk,Furniture,399.0,1,2025-01-09T10:05:00
+1008,7,UK,Noise Cancelling Headphones,Electronics,199.0,1,2025-01-09T12:30:00
+1009,8,ES,Green Tea 200g,Grocery,7.9,4,2025-01-10T09:50:00
+1010,9,DE,"LED Monitor 27""",Electronics,249.99,2,2025-01-10T15:10:00
+1011,10,ES,Whiteboard Markers (set),Stationery,9.99,3,2025-01-11T17:40:00

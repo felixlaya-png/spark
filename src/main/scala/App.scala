@@ -489,8 +489,75 @@ object SqlAndUdfExercises {
 // ------------------------------------------------------------
 // 5. Structured Streaming – Real-Time Word Count
 // ------------------------------------------------------------
+object StreamingWordCountAppExercises {
 
+  def main(args: Array[String]): Unit = {
+    // 1. Create SparkSession (with spark.sql.shuffle.partitions etc. if desired).
+    val spark = SparkSession.builder()
+      .appName("StreamingWordCountAppExercises")
+      .master("local[*]")
+      .config("spark.sql.shuffle.partitions", "8") // optional tuning
+      .config("spark.executor.memory", "2g")       // example extra config
+      .getOrCreate()
+    // Verify SparkSession
+    println(s"Spark version: ${spark.version}")
 
+    import spark.implicits._   //Permite usar ($"customer_id"), sino col("customer_id")
+
+    // 2. Build streaming query for global word counts.
+    // Read streaming data from socket
+    val lines = spark.readStream
+      .format("socket")
+      .option("host", "localhost")
+      .option("port", 9999)
+      .load()
+    // Show schema
+    lines.printSchema()
+
+    // Split into words
+    val words = lines
+      .select(explode(split(col("value"), "\\s+")).as("word"))
+      .filter(length(col("word")) > 0)
+      .withColumn("word", lower(col("word")))
+
+    // Global running count
+    val globalCounts = words
+      .groupBy("word")
+      .count()
+
+    val globalQuery = globalCounts.writeStream
+      .outputMode("update")
+      .format("console")
+      .option("checkpointLocation", "checkpoint/global_wordcount")
+      .start()
+
+    // 3. Build second query with windowed word counts.
+    // Windowed counts using processing time as timestamp
+    val withTs = words.withColumn("timestamp", current_timestamp())
+
+    val windowedCounts = withTs
+      .withWatermark("timestamp", "10 minutes")
+      .groupBy(
+        window(col("timestamp"), "10 minutes", "5 minutes"),
+        col("word")
+      )
+      .count()
+
+    val windowedQuery = windowedCounts.writeStream
+      .outputMode("update")
+      .format("console")
+      .option("truncate", "false")
+      .option("checkpointLocation", "checkpoint/windowed_wordcount")
+      .start()
+
+    globalQuery.awaitTermination()
+    windowedQuery.awaitTermination()
+
+    // 4. Start queries and awaitTermination.
+    spark.stop()
+  }
+
+}
 
 // ------------------------------------------------------------
 // 6. Performance Tuning & Partitioning

@@ -1,0 +1,12 @@
+customer_id,name,email,country,signup_date
+1,Alice Ruiz,alice.ruiz@gmail.com,ES,2024-11-10
+2,Bruno Martin,bruno.martin@outlook.com,FR,2024-09-01
+3,Carla Rossi,carla.rossi@yahoo.com,ES,2023-06-15
+4,David Klein,david.klein@example.com,DE,2022-03-20
+5,Elena Bianchi,elena.bianchi@gmail.com,IT,2024-01-02
+6,Fernando Lopez,fernando.lopez@company.com,ES,2021-07-30
+7,Grace Smith,grace.smith@gmail.com,UK,2023-11-05
+8,Hugo Perez,hugo.perez@yahoo.com,ES,2024-05-12
+9,Iris Jung,iris.jung@outlook.com,DE,2023-02-18
+10,John Doe,john.doe@unknown.net,ES,2022-10-27
+11,Kathy Brown,kathy.brown@gmail.com,ES,2025-01-05
